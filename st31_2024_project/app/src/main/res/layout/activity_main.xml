@@ -17,4 +17,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/edText"
+        android:layout_width="289dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="244dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="293dp"
+        android:layout_height="69dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="70dp"
+        android:text="Button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edText" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

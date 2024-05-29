@@ -1,6 +1,9 @@
 package com.example.st31_2024_project;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -9,7 +12,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,4 +27,24 @@ public class MainActivity extends AppCompatActivity {
         TextView strView = findViewById(R.id.textV);
         strView.setText("はろー");
     }
+
+    @Override
+    public void onClick(View v) {
+        EditText edt = findViewById(R.id.edText);
+        Editable ed = edt.getText();
+        String strName = ed.toString();
+
+        TextView strView = findViewById(R.id.textV);
+        strView.setText(strName);
+    }
+
+//    public void btnClick(View v) {
+//        EditText edt = findViewById(R.id.edText);
+//        Editable ed = edt.getText();
+//        String strName = ed.toString();
+//
+//        TextView strView = findViewById(R.id.textV);
+//        strView.setText(strName);
+//    }
+
 }
