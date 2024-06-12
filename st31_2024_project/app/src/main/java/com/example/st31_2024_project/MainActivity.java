@@ -2,6 +2,7 @@ package com.example.st31_2024_project;
 
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,7 +14,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+import java.util.Objects;
+
+public class MainActivity extends AppCompatActivity
+//        implements View.OnClickListener
+{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,26 +50,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 EditText editText = findViewById(R.id.edText2);
                 String strText2 = editText.getText().toString();
+                Integer intText = 0;
+                Integer intText2 = 0;
 
-                Integer intText2 = Integer.valueOf(strText2);
-                
+                boolean flg = true;
+                try {
+                    intText2 = Integer.valueOf(strText2);
+
+                } catch (NumberFormatException e){
+                    Log.w("st31_2024_r01", "数値以外の入力");
+                    flg = !flg;
+                } catch (Exception e){
+                    Log.e("st31_2024_r01", Objects.requireNonNull(e.getMessage()));
+                    flg = !flg;
+                }
+//                TextView strView = findViewById(R.id.textV);
+                String strMessage = "入力エリアに文字あり";
+                if(flg){
+                    Integer intTotal = 0;
+                    intTotal = intText + intText2;
+                    strMessage = intTotal.toString();
+//                    strView.setText(intTotal);
+                }else {
+                    strMessage = "入力エリアに文字あり";
+                }
+                strView.setText(strMessage);
+
             }
 
         });
     }
 
-    @Override
-    public void onClick(View v) {
-        if ( v.getId() == R.id.btn ) {
-            EditText edt = findViewById(R.id.edText);
-            Editable ed = edt.getText();
-            String strName = ed.toString();
+//    方法2
+//
 
-            TextView strView = findViewById(R.id.textV);
-            strView.setText(strName);
-        } else if ( v.getId() == R.id.textV) {
-
-        }
 
 
 
