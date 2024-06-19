@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity
                 boolean flg = true;
                 try {
                     intText2 = Integer.valueOf(strText2);
+                    intText = Integer.valueOf(strName);
 
                 } catch (NumberFormatException e){
                     Log.w("st31_2024_r01", "数値以外の入力");
