@@ -80,7 +80,66 @@ public class MainActivity extends AppCompatActivity
             }
 
         });
+        //    BMI計算ボタンを押したとき
+        Button buttonBmi = findViewById(R.id.btnBmi);
+        buttonBmi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                BMI計算
+                EditText editText2 = findViewById(R.id.edText);
+                String strHeight = editText2.getText().toString();
+                EditText editText = findViewById(R.id.edText2);
+                String strWeight = editText.getText().toString();
+
+//                数値変換
+                Double dbHeight = 0.0;
+                Double dbWeight = 0.0;
+                String strMessage = "入力エリアに文字あり";
+                boolean flg = true;
+                String judge = "";
+                try {
+                    Double dblHeight = Double.valueOf(strHeight);
+                    Double dblWeight = Double.valueOf(strWeight);
+                    Double dblBmi = dblWeight / (dblHeight * dblHeight / 10000);
+//                    str使った方法
+//                    String strBmi = String.format("%.2f", dblBmi);
+//                    小数点丸め
+                    dblBmi = Math.round(dblBmi * 100.0) / 100.0;
+
+                    if(dblBmi < 18.5){
+                        judge = "低体重(痩せ型)";
+                    }else if(dblBmi < 25){
+                        judge = "標準";
+                    }else if(dblBmi < 30){
+                        judge = "肥満(1度)";
+                    }else if(dblBmi < 35){
+                        judge = "肥満(2度)";
+                    }else if(dblBmi < 40){
+                        judge = "肥満(3度)";
+                    }else {
+                        judge = "肥満(4度)";
+                    }
+                    strMessage = dblBmi.toString();
+                } catch (NumberFormatException e){
+                    Log.w("st31_2024_r01", "数値以外の入力");
+                    flg = !flg;
+                } catch (Exception e){
+                    Log.e("st31_2024_r01", Objects.requireNonNull(e.getMessage()));
+                    flg = !flg;
+                }
+
+                if(!flg){
+                    strMessage = "入力エリアに文字あり";
+                }
+                strView.setText("BMI結果:"+strMessage+"\n判定:"+judge);
+
+
+            }
+        });
     }
+
+
+
 
 //    方法2
 //

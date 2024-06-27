@@ -43,12 +43,28 @@
 
     <Button
         android:id="@+id/btn"
-        android:layout_width="293dp"
-        android:layout_height="69dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="232dp"
+        android:layout_width="255dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="500dp"
+        android:layout_marginBottom="33dp"
         android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/btnBmi"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edText" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnBmi"
+        android:layout_width="250dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginBottom="46dp"
+        android:text="BMI計算"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.028"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
