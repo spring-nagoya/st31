@@ -11,23 +11,33 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="230dp"
-        android:layout_marginBottom="219dp"
+        android:layout_marginBottom="61dp"
         android:text="Hello World!"
-        app:layout_constraintBottom_toTopOf="@+id/btnMain"
+        app:layout_constraintBottom_toTopOf="@+id/edTextMain"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.323" />
+        app:layout_constraintTop_toBottomOf="@+id/btnMain" />
 
     <Button
         android:id="@+id/btnMain"
         android:layout_width="219dp"
-        android:layout_height="85dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginBottom="141dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="151dp"
+        android:layout_marginBottom="120dp"
         android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edTextMain"
+        android:layout_width="251dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="225dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

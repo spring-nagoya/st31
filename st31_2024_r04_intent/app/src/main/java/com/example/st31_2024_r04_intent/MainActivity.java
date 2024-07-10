@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,7 +32,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SubActivity.class);
-                intent.putExtra("data1", "片岡");
+                EditText edMain = findViewById(R.id.edTextMain);
+                String strInput = edMain.getText().toString();
+                intent.putExtra("data1", strInput);
 
                 startActivity(intent);
             }

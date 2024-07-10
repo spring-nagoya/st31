@@ -2,6 +2,7 @@ package com.example.st31_2024_r04_intent;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -24,17 +25,31 @@ public class SubActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        Intent intent = getIntent();
-        String intentData =intent.getStringExtra("data1");
+        String strData;
+        try {
+            Intent intent = getIntent();
+            strData =intent.getStringExtra("data1");
+        }catch (NullPointerException e) {
+            strData = "ぬるぽ" + e.getMessage();
+        }
 
-        TextView subText = findViewById(R.id.textSub);
-        subText.setText(intentData);
+
+//        Bundle bundle = intent.getExtras();
+//        String strData = bundle.getString("data1");
+        TextView subText = findViewById(R.id.txtViewSub);
+        subText.setText(strData);
 
 
 
         Button btnSub = findViewById(R.id.btnSub);
-        btnSub.setOnClickListener(v -> {
-            finish();
+        btnSub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
         });
+//        v -> {
+//            finish();
+//        }
     }
 }
