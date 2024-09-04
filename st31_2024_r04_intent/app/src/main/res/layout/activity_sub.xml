@@ -20,11 +20,12 @@
 
     <TextView
         android:id="@+id/txtViewSub"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="201dp"
-        android:layout_marginBottom="221dp"
+        android:layout_width="195dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="175dp"
+        android:layout_marginBottom="230dp"
         android:text="TextView"
+        app:autoSizeMinTextSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/btnSub"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
