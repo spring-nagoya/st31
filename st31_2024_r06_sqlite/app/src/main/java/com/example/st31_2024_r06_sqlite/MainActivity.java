@@ -1,28 +1,25 @@
 package com.example.st31_2024_r06_sqlite;
 
+import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
+import com.example.st31_2024_r06_sqlite.databinding.ActivityMainBinding;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import android.widget.TextView;
 
-import android.view.View;
-
+import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
-import com.example.st31_2024_r06_sqlite.databinding.ActivityMainBinding;
+
 
 public class MainActivity extends AppCompatActivity {
 
-    private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
     private DatabaseHelper helper;
     private SQLiteDatabase db;
@@ -31,17 +28,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.nav_host_fragment_content_main), (v, insets) -> {
-            v.setPadding(v.getPaddingLeft(), v.getPaddingTop(), v.getPaddingRight(), insets.getInsets(WindowInsetsCompat.Type.systemBars()).bottom);
+        setContentView(R.layout.activity_main);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
         try {
             helper = new DatabaseHelper(this);
-        } catch (Exception e) {
-            Snackbar.make(binding.getRoot(), e.getMessage(), Snackbar.LENGTH_LONG).show();
-        }
+        } catch (Exception e) {}
         db = helper.getWritableDatabase();
         Cursor dbRows;
         dbRows = db.rawQuery("select * from user", null);
@@ -54,6 +49,26 @@ public class MainActivity extends AppCompatActivity {
 //        null,
 //        null,
 //        null);
+        String strMessage = "";
+        int row_count = dbRows.getCount();
+        if(row_count == 0){
+            strMessage = "データがありません";
+        } else {
+            dbRows.moveToFirst();
+            for (int i = 0; i < row_count; i++) {
+                int colIndexName = dbRows.getColumnIndex("name");
+                String strName = dbRows.getString(colIndexName) + "\n";
+                @SuppressLint("Range")
+                String strId = dbRows.getString(dbRows.getColumnIndex("id"));
+
+                strMessage += "ID:" + strId + ", 名前" + strName + "\n";
+                dbRows.moveToNext();
+            }
+            TextView textV = findViewById(R.id.textView1);
+            textV.setText(strMessage);
+//            Snackbar.make(binding.getRoot(), strMessage, Snackbar.LENGTH_LONG).show();
+        }
+
         dbRows.close();
         db.close();
 

@@ -10,40 +10,53 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="162dp"
-        android:layout_height="49dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="73dp"
         android:background="@color/design_default_color_error"
         android:text="BMI計算"
         android:textColor="#C5CAE9"
-        tools:layout_editor_absoluteX="124dp"
-        tools:layout_editor_absoluteY="332dp" />
+        app:layout_constraintBottom_toTopOf="@+id/edTextMain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnMain" />
 
     <Button
         android:id="@+id/btnMain"
         android:layout_width="219dp"
-        android:layout_height="61dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="151dp"
+        android:layout_marginBottom="120dp"
         android:backgroundTint="@color/material_dynamic_primary80"
         android:text="計算"
-        tools:layout_editor_absoluteX="96dp"
-        tools:layout_editor_absoluteY="151dp" />
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edTextMain"
         android:layout_width="251dp"
-        android:layout_height="61dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="55dp"
         android:ems="10"
         android:hint="身長"
         android:inputType="text"
-        tools:layout_editor_absoluteX="80dp"
-        tools:layout_editor_absoluteY="454dp" />
+        app:layout_constraintBottom_toTopOf="@+id/edTextMain2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
         android:id="@+id/edTextMain2"
         android:layout_width="251dp"
-        android:layout_height="61dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="100dp"
         android:ems="10"
         android:hint="体重"
         android:inputType="text"
-        tools:layout_editor_absoluteX="80dp"
-        tools:layout_editor_absoluteY="570dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edTextMain" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
