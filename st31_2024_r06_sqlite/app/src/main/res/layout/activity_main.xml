@@ -10,24 +10,57 @@
 
     <TextView
         android:id="@+id/textView1"
-        android:layout_width="94dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="262dp"
-        android:layout_marginBottom="57dp"
+        android:layout_width="330dp"
+        android:layout_height="63dp"
         android:text="tet"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="115dp" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginBottom="356dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textView1"
-        app:layout_constraintTop_toBottomOf="@+id/textView1" />
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="135dp"
+        android:layout_height="74dp"
+        android:text="追加"
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="614dp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="334dp"
+        android:layout_height="61dp"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="39dp"
+        tools:layout_editor_absoluteY="54dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="検索" />
+
+        <EditText
+            android:id="@+id/editTextText"
+            android:layout_width="145dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Name" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="103dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="検索" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="320dp"
+        android:layout_height="422dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="45dp"
+        tools:layout_editor_absoluteY="178dp"></LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

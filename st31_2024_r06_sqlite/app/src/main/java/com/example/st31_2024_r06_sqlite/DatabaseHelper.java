@@ -26,9 +26,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         strSQL = "CREATE TABLE user (id TEXT PRIMARY KEY, name TEXT, age INTEGER, pass TEXT);";
         db.execSQL(strSQL);
 
-        strSQL = "insert into user values ('00001', '片岡', 43, 'ktok');";
+        strSQL = "insert into user values ('00001', '片岡', 43, 'ktok')";
         db.execSQL(strSQL);
-        strSQL = "insert into user values ('00002', '長屋', 45, 'nagaya');";
+        strSQL = "insert into user values ('00002', '長屋', 45, 'nagaya')";
         db.execSQL(strSQL);
     }
 

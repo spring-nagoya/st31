@@ -10,12 +10,18 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -42,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         dbRows = db.rawQuery("select * from user", null);
 
 
+
+
 //        dbRows = db.query("t_user",
 //        new String[]{"id","name","age","pass"},
 //        null,
@@ -61,9 +69,45 @@ public class MainActivity extends AppCompatActivity {
                 @SuppressLint("Range")
                 String strId = dbRows.getString(dbRows.getColumnIndex("id"));
 
-                strMessage += "ID:" + strId + ", 名前" + strName + "\n";
+                strMessage += "ID:" + strId + ", 名前:" + strName + "\n";
+                HashMap<String,String> map = new HashMap<>();
+
+                map.put("id"  ,dbRows.getString(dbRows.getColumnIndex("id")));
+
+                map.put("name",dbRows.getString(dbRows.getColumnIndex("name")));
+
+                map.put("age" ,dbRows.getString(dbRows.getColumnIndex("age")));
+                map.put("pass" ,dbRows.getString(dbRows.getColumnIndex("pass")));
                 dbRows.moveToNext();
             }
+            ArrayList<HashMap<String,String>> ary
+                    = new ArrayList<>();
+            //該当データをLinearLayoutに表示
+
+            LinearLayout linear1 = findViewById(R.id.linearRow);
+
+            //LinearLayoutの中のデータを削除
+
+            linear1.removeAllViews();
+
+            //1件分の表示ループ
+
+            for(HashMap map: ary){
+
+                View view_row = getLayoutInflater().inflate(R.layout.row_data,null);
+
+                linear1.addView(view_row);
+
+                TextView txtData = findViewById(R.id.txtData);
+
+                txtData.setText("id:"+map.get("id")+",name:"+map.get("name"));
+
+                Button btnUpdate = findViewById(R.id.btnUpdate);
+
+                btnUpdate.setTag(map.get("f_id"));
+
+            }
+
             TextView textV = findViewById(R.id.textView1);
             textV.setText(strMessage);
 //            Snackbar.make(binding.getRoot(), strMessage, Snackbar.LENGTH_LONG).show();
