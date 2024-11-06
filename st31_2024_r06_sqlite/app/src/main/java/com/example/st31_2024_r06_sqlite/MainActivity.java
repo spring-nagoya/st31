@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import com.example.st31_2024_r06_sqlite.databinding.ActivityMainBinding;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +19,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -43,12 +43,33 @@ public class MainActivity extends AppCompatActivity {
         });
         try {
             helper = new DatabaseHelper(this);
-        } catch (Exception e) {}
+        } catch (Exception e) {
+
+        }
         db = helper.getWritableDatabase();
-        Cursor dbRows;
-        dbRows = db.rawQuery("select * from user", null);
 
 
+        AbstractList<HashMap<String, String>> ary =fncSQLite(db);
+            //該当データをLinearLayoutに表示
+        fncDataDisp(ary, strMessage);
+
+//            Snackbar.make(binding.getRoot(), strMessage, Snackbar.LENGTH_LONG).show();
+        Button btnSearch = findViewById(R.id.btnSearch);
+            btnSearch.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+        }
+
+
+
+@SuppressLint("Range")
+public AbstractList<HashMap<String, String>> fncSQLite(SQLiteDatabase db) {
+
+    Cursor dbRows;
+    dbRows = db.rawQuery("select * from user", null);
 
 
 //        dbRows = db.query("t_user",
@@ -59,91 +80,78 @@ public class MainActivity extends AppCompatActivity {
 //        null,
 //        null);
 //        LinearLayout inflater = La
-        String strMessage = "";
-        int row_count = dbRows.getCount();
-        if(row_count == 0){
-            strMessage = "データがありません";
-        } else {
-            dbRows.moveToFirst();
-            ArrayList<HashMap<String,String>> ary
-                    = new ArrayList<>();
-            for (int i = 0; i < row_count; i++) {
-                int colIndexName = dbRows.getColumnIndex("name");
-                String strName = dbRows.getString(colIndexName) + "\n";
-                @SuppressLint("Range")
-                String strId = dbRows.getString(dbRows.getColumnIndex("id"));
+    String strMessage = "";
+    int row_count = dbRows.getCount();
+    if (row_count == 0) {
+        strMessage = "データがありません";
+    } else {
+        dbRows.moveToFirst();
+        ArrayList<HashMap<String, String>> ary
+                = new ArrayList<>();
+        for (int i = 0; i < row_count; i++) {
+            int colIndexName = dbRows.getColumnIndex("name");
+            String strName = dbRows.getString(colIndexName) + "\n";
+            @SuppressLint("Range")
+            String strId = dbRows.getString(dbRows.getColumnIndex("id"));
 
-                strMessage += "ID:" + strId + ", 名前:" + strName + "\n";
-                HashMap<String,String> map = new HashMap<>();
+            strMessage += "ID:" + strId + ", 名前:" + strName + "\n";
+            HashMap<String, String> map = new HashMap<>();
 
-                map.put("id"  ,dbRows.getString(dbRows.getColumnIndex("id")));
+            map.put("id", dbRows.getString(dbRows.getColumnIndex("id")));
 
-                map.put("name",dbRows.getString(dbRows.getColumnIndex("name")));
+            map.put("name", dbRows.getString(dbRows.getColumnIndex("name")));
 
-                map.put("age" ,dbRows.getString(dbRows.getColumnIndex("age")));
-                map.put("pass" ,dbRows.getString(dbRows.getColumnIndex("pass")));
-                ary.add(map);
-                dbRows.moveToNext();
-            }
+            map.put("age", dbRows.getString(dbRows.getColumnIndex("age")));
+            map.put("pass", dbRows.getString(dbRows.getColumnIndex("pass")));
+            ary.add(map);
+            dbRows.moveToNext();
 
-            //該当データをLinearLayoutに表示
+            dbRows.close();
+            db.close();
+            return ary;
+        }
+    }
+    return null;
+}
 
-            LinearLayout linear1 = findViewById(R.id.linearRow);
+    public void fncDataDisp(ArrayList<HashMap> ary, String strMessage) {
+        LinearLayout linear1 = findViewById(R.id.linearRow);
 
-            //LinearLayoutの中のデータを削除
+        //LinearLayoutの中のデータを削除
 
-            linear1.removeAllViews();
+        linear1.removeAllViews();
 
-            //1件分の表示ループ
+        //1件分の表示ループ
 
-            for(HashMap map: ary){
+        for (HashMap map : ary) {
 
-                View view_row = getLayoutInflater().inflate(R.layout.row_data,null);
+            View view_row = getLayoutInflater().inflate(R.layout.row_data, null);
 
-                linear1.addView(view_row);
+            linear1.addView(view_row);
 
-                TextView txtData = view_row.findViewById(R.id.txtData);
+            TextView txtData = view_row.findViewById(R.id.txtData);
 
-                txtData.setText("id:"+map.get("id")+",name:"+map.get("name"));
+            txtData.setText("id:" + map.get("id") + ",name:" + map.get("name"));
 
-                Button btnUpdate = findViewById(R.id.btnUpdate);
+            Button btnUpdate = findViewById(R.id.btnUpdate);
 
-                btnUpdate.setTag(map.get("id"));
+            btnUpdate.setTag(map.get("id"));
 
-            }
-
-            TextView textV = findViewById(R.id.textView1);
-            textV.setText(strMessage);
-//            Snackbar.make(binding.getRoot(), strMessage, Snackbar.LENGTH_LONG).show();
-
-            Button btnSearch = findViewById(R.id.btnSearch);
-            btnSearch.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
         }
 
-        dbRows.close();
-        db.close();
-
-//        setSupportActionBar(binding.toolbar);
-
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-//        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-
-//        binding.fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAnchorView(R.id.fab)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+        TextView textV = findViewById(R.id.textView1);
+        textV.setText(strMessage);
+    }
+    public static class SQLResult {
+        public ArrayList<HashMap<String, String>> ary;
+        public String strMessage;
+        public void Result(ArrayList<HashMap<String, String>> value1, String value2) {
+            this.ary = value1;
+            this.strMessage = value2;
+        }
     }
 }
+
 
 //    @Override
 //    public boolean onSupportNavigateUp() {
