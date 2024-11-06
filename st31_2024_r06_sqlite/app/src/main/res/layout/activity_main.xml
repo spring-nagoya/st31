@@ -12,25 +12,33 @@
         android:id="@+id/textView1"
         android:layout_width="330dp"
         android:layout_height="63dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginEnd="45dp"
         android:text="tet"
-        tools:layout_editor_absoluteX="36dp"
-        tools:layout_editor_absoluteY="115dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <Button
         android:id="@+id/btnAdd"
         android:layout_width="135dp"
         android:layout_height="74dp"
+        android:layout_marginBottom="43dp"
         android:text="追加"
-        tools:layout_editor_absoluteX="36dp"
-        tools:layout_editor_absoluteY="614dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="334dp"
         android:layout_height="61dp"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="54dp"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteX="39dp"
-        tools:layout_editor_absoluteY="54dp">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textView"
@@ -49,7 +57,7 @@
             android:text="Name" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btnSearch"
             android:layout_width="103dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -57,10 +65,16 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearRow"
         android:layout_width="320dp"
         android:layout_height="422dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginEnd="46dp"
+        android:layout_marginBottom="14dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="45dp"
-        tools:layout_editor_absoluteY="178dp"></LinearLayout>
+        app:layout_constraintBottom_toTopOf="@+id/btnAdd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView1"></LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

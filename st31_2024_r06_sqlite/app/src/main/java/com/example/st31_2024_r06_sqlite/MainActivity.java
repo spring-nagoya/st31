@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseHelper helper;
     private SQLiteDatabase db;
 
+    @SuppressLint("Range")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,12 +58,15 @@ public class MainActivity extends AppCompatActivity {
 //        null,
 //        null,
 //        null);
+//        LinearLayout inflater = La
         String strMessage = "";
         int row_count = dbRows.getCount();
         if(row_count == 0){
             strMessage = "データがありません";
         } else {
             dbRows.moveToFirst();
+            ArrayList<HashMap<String,String>> ary
+                    = new ArrayList<>();
             for (int i = 0; i < row_count; i++) {
                 int colIndexName = dbRows.getColumnIndex("name");
                 String strName = dbRows.getString(colIndexName) + "\n";
@@ -78,10 +82,10 @@ public class MainActivity extends AppCompatActivity {
 
                 map.put("age" ,dbRows.getString(dbRows.getColumnIndex("age")));
                 map.put("pass" ,dbRows.getString(dbRows.getColumnIndex("pass")));
+                ary.add(map);
                 dbRows.moveToNext();
             }
-            ArrayList<HashMap<String,String>> ary
-                    = new ArrayList<>();
+
             //該当データをLinearLayoutに表示
 
             LinearLayout linear1 = findViewById(R.id.linearRow);
@@ -98,19 +102,27 @@ public class MainActivity extends AppCompatActivity {
 
                 linear1.addView(view_row);
 
-                TextView txtData = findViewById(R.id.txtData);
+                TextView txtData = view_row.findViewById(R.id.txtData);
 
                 txtData.setText("id:"+map.get("id")+",name:"+map.get("name"));
 
                 Button btnUpdate = findViewById(R.id.btnUpdate);
 
-                btnUpdate.setTag(map.get("f_id"));
+                btnUpdate.setTag(map.get("id"));
 
             }
 
             TextView textV = findViewById(R.id.textView1);
             textV.setText(strMessage);
 //            Snackbar.make(binding.getRoot(), strMessage, Snackbar.LENGTH_LONG).show();
+
+            Button btnSearch = findViewById(R.id.btnSearch);
+            btnSearch.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
         }
 
         dbRows.close();

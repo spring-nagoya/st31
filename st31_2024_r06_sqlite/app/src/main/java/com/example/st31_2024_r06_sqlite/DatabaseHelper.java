@@ -23,7 +23,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String strSQL = "";
-        strSQL = "CREATE TABLE user (id TEXT PRIMARY KEY, name TEXT, age INTEGER, pass TEXT);";
+        strSQL = "CREATE TABLE if not exists user (id TEXT PRIMARY KEY, name TEXT, age INTEGER, pass TEXT);";
         db.execSQL(strSQL);
 
         strSQL = "insert into user values ('00001', '片岡', 43, 'ktok')";
