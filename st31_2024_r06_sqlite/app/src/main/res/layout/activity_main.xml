@@ -48,7 +48,7 @@
             android:text="検索" />
 
         <EditText
-            android:id="@+id/editTextText"
+            android:id="@+id/edKeyword"
             android:layout_width="145dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
