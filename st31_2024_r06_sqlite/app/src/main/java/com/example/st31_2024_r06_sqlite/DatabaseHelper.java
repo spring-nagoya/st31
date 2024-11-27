@@ -34,7 +34,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS user");
-        onCreate(db);
+
+        if(newVersion == 2){
+            db.execSQL("DROP TABLE IF EXISTS user");
+            onCreate(db);
+        } else if (newVersion == 3) {
+            db.execSQL("update user set name = 'kataoka' where id = '00001'");
+        }
+
     }
 }
