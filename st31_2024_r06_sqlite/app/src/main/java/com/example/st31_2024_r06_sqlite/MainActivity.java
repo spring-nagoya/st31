@@ -1,6 +1,7 @@
 package com.example.st31_2024_r06_sqlite;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import com.example.st31_2024_r06_sqlite.databinding.ActivityMainBinding;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         try {
             helper = new DatabaseHelper(this);
         } catch (Exception e) {
@@ -67,10 +70,23 @@ public class MainActivity extends AppCompatActivity {
                 fncDataDisp(ary);
             }
         });
+        Button btnInsert = findViewById(R.id.btnAdd);
+        btnInsert.setOnClickListener(new View.OnClickListener() {
+            final Intent intent = new Intent(MainActivity.this, InputFormActivity.class);
 
-        db.close();
+            @Override
+            public void onClick(View v) {
+                startActivity(intent);
+            }
+        });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        EditText edKey = findViewById(R.id.edKeyword);
+        String strKey = edKey.getText().toString();
+    }
 
     @SuppressLint("Range")
     public AbstractList<HashMap<String, String>> fncSQLite(SQLiteDatabase db, String strKey) {

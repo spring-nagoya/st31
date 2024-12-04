@@ -1,10 +1,12 @@
 package com.example.st31_2024_r06_sqlite;
 
+import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -79,9 +81,9 @@ public class InputFormActivity extends AppCompatActivity {
         inPass.setText("");
     }
     public void insertData() {
-        EditText inId = findViewById(R.id.inputName);
+        EditText inId = findViewById(R.id.inputId);
         String id = inId.getText().toString();
-        db.insert("user", null, null);
+
 
         EditText inName = findViewById(R.id.inputName);
         String name = inName.getText().toString();
@@ -91,6 +93,24 @@ public class InputFormActivity extends AppCompatActivity {
 
         EditText inPass = findViewById(R.id.inputPass);
         String pass = inPass.getText().toString();
+
+        ContentValues values = new ContentValues();
+        values.put("id", id);
+        values.put("name", name);
+        values.put("age", age);
+        values.put("pass", pass);
+        db.insert("user", null, values);
+
+        UserBeans user = new UserBeans(id, name, Integer.parseInt(age), pass);
+        user.fncGetData(InputFormActivity.this);
+//        strId = user.getId();
+        user.fncGetData(InputFormActivity.this, R.id.inputId);
+
+        Toast.makeText(this, "データを登録しました", Toast.LENGTH_SHORT).show();
+
+
+
+
 
 //        String strSQL = "in
 
