@@ -86,6 +86,9 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         EditText edKey = findViewById(R.id.edKeyword);
         String strKey = edKey.getText().toString();
+
+        fncSQLite(db, strKey);
+        fncDataDisp(fncSQLite(db, strKey));
     }
 
     @SuppressLint("Range")
