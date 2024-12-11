@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -174,6 +175,13 @@ public class MainActivity extends AppCompatActivity {
             Button btnUpdate = findViewById(R.id.btnUpdate);
 
             btnUpdate.setTag(map.get("id"));
+            btnUpdate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String strId = (String) v.getTag();
+                    Toast.makeText(MainActivity.this, "id:" + strId + "更新", Toast.LENGTH_SHORT).show();
+                }
+            });
 
         }
     }

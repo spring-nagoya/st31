@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/upd_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InputFormActivity"
+    tools:layout_editor_absoluteX="11dp"
+    tools:layout_editor_absoluteY="122dp">
+
+    <TextView
+        android:id="@+id/upd_textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="62dp"
+        android:text="ID"
+        app:layout_constraintBaseline_toBaselineOf="@+id/upd_inputId"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/upd_textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="名前"
+        app:layout_constraintBaseline_toBaselineOf="@+id/upd_inputName"
+        app:layout_constraintEnd_toEndOf="@+id/upd_textView4"
+        app:layout_constraintStart_toStartOf="@+id/upd_textView4" />
+
+    <TextView
+        android:id="@+id/upd_textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="年齢"
+        app:layout_constraintBaseline_toBaselineOf="@+id/upd_inputAge"
+        app:layout_constraintEnd_toEndOf="@+id/upd_btnReturn"
+        app:layout_constraintStart_toStartOf="@+id/upd_btnReturn" />
+
+    <TextView
+        android:id="@+id/upd_textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="33dp"
+        android:text="パスワード"
+        app:layout_constraintEnd_toStartOf="@+id/upd_inputPass"
+        app:layout_constraintTop_toBottomOf="@+id/upd_inputAge" />
+
+    <EditText
+        android:id="@+id/upd_inputId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="209dp"
+        android:layout_marginEnd="36dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/upd_inputName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="43dp"
+        android:layout_marginEnd="36dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/upd_inputId" />
+
+    <EditText
+        android:id="@+id/upd_inputAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="41dp"
+        android:layout_marginEnd="36dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/upd_inputName" />
+
+    <Button
+        android:id="@+id/upd_btnReturn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text="戻る"
+        app:layout_constraintBaseline_toBaselineOf="@+id/upd_btnClear"
+        app:layout_constraintEnd_toStartOf="@+id/upd_btnClear"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/upd_btnClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="86dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="85dp"
+        android:text="クリア"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/upd_btnInsert"
+        app:layout_constraintStart_toEndOf="@+id/upd_btnReturn"
+        app:layout_constraintTop_toBottomOf="@+id/upd_inputPass" />
+
+    <Button
+        android:id="@+id/upd_btnInsert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="追加"
+        app:layout_constraintBaseline_toBaselineOf="@+id/upd_btnClear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/upd_btnClear" />
+
+    <TextView
+        android:id="@+id/upd_textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="93dp"
+        android:layout_marginBottom="95dp"
+        android:text="ユーザー情報入力"
+        app:layout_constraintBottom_toTopOf="@+id/upd_inputId"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/upd_inputPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="36dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintBaseline_toBaselineOf="@+id/upd_textView5"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
