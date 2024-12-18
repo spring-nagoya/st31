@@ -1,5 +1,7 @@
 package com.example.st31_2024_r06_sqlite;
 
+
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -28,7 +30,7 @@ public class EditFormActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_edit_form);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.upd_main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
@@ -36,6 +38,9 @@ public class EditFormActivity extends AppCompatActivity {
 
         dbHelper = new DatabaseHelper(this);
         mydb = dbHelper.getWritableDatabase();
+
+//        intentで受け取った値を表示
+//        String strId = getIntent().getStringExtra("id");
 
         fncClear();
 
@@ -59,8 +64,8 @@ public class EditFormActivity extends AppCompatActivity {
         });
 
         //更新ボタンを押した時
-        Button btnUpdata = findViewById(R.id.upd_btnUpdata);
-        btnUpdata.setOnClickListener(new View.OnClickListener() {
+        Button btnUpdate = findViewById(R.id.upd_btnUpdate);
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //入力エリアの値受け取り
@@ -77,19 +82,25 @@ public class EditFormActivity extends AppCompatActivity {
                 String strPass = inPass.getText().toString();
 
                 //入力検証
+                if(strId.isEmpty() || strName.isEmpty() || strAge.isEmpty() || strPass.isEmpty()){
+                    //画面にinsertの通知(Toast)
+                    Toast.makeText(EditFormActivity.this,
+                            "未入力の項目があります",Toast.LENGTH_LONG).show();
+                    return;
+                }
 
-                //データ更新(12/18続き)
-                // mydb.execSQLでupdata文を作って渡す。
+                // mydb.execSQLでupdate文を作って渡す。
+//                String strSQL = "update user set name = '" + strName + "', age = " + strAge + ", pass = '" + strPass + "' where id = '" + strId + "'";
+//                mydb.execSQL(strSQL);
 
                 //ContentValuesを使って、データ登録の準備 12/18続き)
                 ContentValues values = new ContentValues();
-                values.put("f_id",strId);
-                values.put("f_name",strName);
-                values.put("f_age",strAge);
-                values.put("f_pass",strPass);
+                values.put("name",strName);
+                values.put("age",strAge);
+                values.put("pass",strPass);
 
                 //mydb.updateでデータ登録をさせる。
-                //mydb.insert("t_user",null,values);
+                mydb.update("user",values,"id = ?",new String[]{strId});
 
                 //画面にinsertの通知(Toast)
                 Toast.makeText(EditFormActivity.this,
