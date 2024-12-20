@@ -3,6 +3,7 @@ package com.example.st31_2024_r06_sqlite;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -16,14 +17,17 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.st31_2024_r06_sqlite.DatabaseHelper;
-import com.example.st31_2024_r06_sqlite.R;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class EditFormActivity extends AppCompatActivity {
 
     //DBの変数宣言
     private DatabaseHelper dbHelper;
     private SQLiteDatabase mydb;
+    private String exrId;
+
+    ArrayList<HashMap<String, String>> ary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +43,21 @@ public class EditFormActivity extends AppCompatActivity {
         dbHelper = new DatabaseHelper(this);
         mydb = dbHelper.getWritableDatabase();
 
-//        intentで受け取った値を表示
-//        String strId = getIntent().getStringExtra("id");
+
 
         fncClear();
+
+        exrId = getIntent().getStringExtra("id");
+
+        ary = fncSQLite(exrId);
+        for(int i = 0; i < ary.size(); i++){
+            HashMap<String, String> map = ary.get(i);
+            ((EditText)findViewById(R.id.upd_inputId)).setText(map.get("id"));
+            ((EditText)findViewById(R.id.upd_inputName)).setText(map.get("name"));
+            ((EditText)findViewById(R.id.upd_inputAge)).setText(map.get("age"));
+            ((EditText)findViewById(R.id.upd_inputPass)).setText(map.get("pass"));
+
+        }
 
         //戻るボタンを押した時
         Button btnReturn = findViewById(R.id.upd_btnReturn);
@@ -106,6 +121,8 @@ public class EditFormActivity extends AppCompatActivity {
                 Toast.makeText(EditFormActivity.this,
                         "updateが完了",Toast.LENGTH_LONG).show();
 
+//                画面終了
+                finish();
             }
         });
 
@@ -123,6 +140,33 @@ public class EditFormActivity extends AppCompatActivity {
 
         EditText inPass = findViewById(R.id.upd_inputPass);
         inPass.setText("");
+    }
+
+    @SuppressLint("Range")
+    public ArrayList<HashMap<String, String>> fncSQLite(String keyword){
+        Cursor dbRows;
+
+        dbRows = mydb.query("user", new String[]{"id","name","age","pass"}, "id like ?", new String[]{ exrId }, null, null, null);
+
+        int row_count = dbRows.getCount();
+        if(row_count == 0){
+            Toast.makeText(EditFormActivity.this,
+                    "データがありません",Toast.LENGTH_LONG).show();
+        } else {
+            dbRows.moveToFirst();
+            ary = new ArrayList<>();
+            for(int i = 0; i < row_count; i++){
+                HashMap<String, String> map = new HashMap<>();
+                map.put("id", dbRows.getString(dbRows.getColumnIndex("id")));
+                map.put("name", dbRows.getString(dbRows.getColumnIndex("name")));
+                map.put("age", dbRows.getString(dbRows.getColumnIndex("age")));
+                map.put("pass", dbRows.getString(dbRows.getColumnIndex("pass")));
+                ary.add(map);
+                dbRows.moveToNext();
+            }
+        }
+        dbRows.close();
+        return ary ;
     }
 
 }

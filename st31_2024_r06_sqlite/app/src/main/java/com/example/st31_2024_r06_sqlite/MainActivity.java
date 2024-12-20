@@ -30,7 +30,6 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActivityMainBinding binding;
     private DatabaseHelper helper;
     private SQLiteDatabase db;
 
@@ -171,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
 
             txtData.setText("id:" + map.get("id") + ",name:" + map.get("name"));
 
-            Button btnUpdate = findViewById(R.id.btnUpdate);
+            Button btnUpdate = view_row.findViewById(R.id.btnUpdate);
 
             btnUpdate.setTag(map.get("id"));
             btnUpdate.setOnClickListener(new View.OnClickListener() {
@@ -196,6 +195,49 @@ public class MainActivity extends AppCompatActivity {
             this.ary = value1;
             this.strMessage = value2;
         }
+    }
+
+    @SuppressLint("Range")
+    public void fncSQLite(String keyword){
+        Cursor dbRows;
+        try {
+            if (!Objects.equals(keyword, "")) {
+                dbRows = db.rawQuery("select * from user where name like ?", new String[]{"%" + keyword + "%"});
+            } else {
+                dbRows = db.rawQuery("select * from user", null);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
+        String strMessage = "";
+        TextView textV = findViewById(R.id.textView1);
+        int row_count = dbRows.getCount();
+        if (row_count == 0) {
+            strMessage = "データがありません";
+        } else {
+            dbRows.moveToFirst();
+            ArrayList<HashMap<String, String>> ary = new ArrayList<>();
+            for (int i = 0; i < row_count; i++) {
+                int colIndexName = dbRows.getColumnIndex("name");
+                String strName = dbRows.getString(colIndexName) + "\n";
+                @SuppressLint("Range")
+                String strId = dbRows.getString(dbRows.getColumnIndex("id"));
+                strMessage += "ID:" + strId + ", 名前:" + strName + "\n";
+                HashMap<String, String> map = new HashMap<>();
+                map.put("id", dbRows.getString(dbRows.getColumnIndex("id")));
+                map.put("name", dbRows.getString(dbRows.getColumnIndex("name")));
+                map.put("age", dbRows.getString(dbRows.getColumnIndex("age")));
+                map.put("pass", dbRows.getString(dbRows.getColumnIndex("pass")));
+                ary.add(map);
+                dbRows.moveToNext();
+            }
+            dbRows.close();
+            textV.setText(strMessage);
+            fncDataDisp(ary);
+        }
+        textV.setText(strMessage);
+        dbRows.close();
     }
 
 }
