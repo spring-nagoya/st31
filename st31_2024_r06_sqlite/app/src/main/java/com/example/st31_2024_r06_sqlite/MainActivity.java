@@ -184,6 +184,18 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
+            Button btnDelete = view_row.findViewById(R.id.btnDelete);
+
+            btnDelete.setTag(map.get("id"));
+            btnDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String strId = (String) v.getTag();
+                    db.delete("user", "id = ?", new String[]{strId});
+                    fncDataDisp(fncSQLite(db, ""));
+                }
+            });
+
         }
     }
 
