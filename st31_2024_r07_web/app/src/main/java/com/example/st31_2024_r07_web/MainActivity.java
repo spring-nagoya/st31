@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         webView.loadUrl("https://www.google.com");
 //        webView.loadUrl("https://www.yahoo.co.jp");
-//10.0.2.2:5000
+//10.0.2.2:5000 django:8000
 
 //        戻る・進むボタン
         Button btnBack = findViewById(R.id.btnBack);
