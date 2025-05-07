@@ -23,12 +23,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String strSQL = "";
-        strSQL = "CREATE TABLE if not exists user (id TEXT PRIMARY KEY, name TEXT, age INTEGER, pass TEXT);";
+        strSQL = "CREATE TABLE if not exists mod (id TEXT PRIMARY KEY, name TEXT, url TEXT);";
         db.execSQL(strSQL);
 
-        strSQL = "insert into user values ('00001', '片岡', 43, 'ktok')";
+        strSQL = "insert into mod values ('1', 'Tinkers Construct', 'https://www.curseforge.com/minecraft/mc-mods/tinkers-construct')";
         db.execSQL(strSQL);
-        strSQL = "insert into user values ('00002', '長屋', 45, 'nagaya')";
+        strSQL = "insert into mod values ('2', 'Thirst Was Taken', 'https://www.curseforge.com/minecraft/mc-mods/thirst-was-taken')";
         db.execSQL(strSQL);
     }
 
@@ -36,10 +36,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
         if(newVersion == 2){
-            db.execSQL("DROP TABLE IF EXISTS user");
+            db.execSQL("DROP TABLE IF EXISTS mod");
             onCreate(db);
         } else if (newVersion == 3) {
-            db.execSQL("update user set name = 'kataoka' where id = '00001'");
+            db.execSQL("update mod set name = 'ars nouveau' where id = '1'");
         }
 
     }

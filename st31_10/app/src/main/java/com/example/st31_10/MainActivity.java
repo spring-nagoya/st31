@@ -95,15 +95,15 @@ public class MainActivity extends AppCompatActivity {
         Cursor dbRows;
         try {
             if (!Objects.equals(strKey, "")) {
-                dbRows = db.rawQuery("select * from user where name like ?", new String[]{"%" + strKey + "%"});
+                dbRows = db.rawQuery("select * from mod where name like ?", new String[]{"%" + strKey + "%"});
             } else {
-                dbRows = db.rawQuery("select * from user", null);
+                dbRows = db.rawQuery("select * from mod", null);
             }
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-//        dbRows = db.query("t_user",
+//        dbRows = db.query("t_mod",
 //        new String[]{"id","name","age","pass"},
 //                "name like ?",
 //                new String[]{ "%" +strKey + "%" },
@@ -134,8 +134,8 @@ public class MainActivity extends AppCompatActivity {
 
                 map.put("name", dbRows.getString(dbRows.getColumnIndex("name")));
 
-                map.put("age", dbRows.getString(dbRows.getColumnIndex("age")));
-                map.put("pass", dbRows.getString(dbRows.getColumnIndex("pass")));
+                map.put("url", dbRows.getString(dbRows.getColumnIndex("url")));
+
                 ary.add(map);
                 dbRows.moveToNext();
             }
@@ -191,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     String strId = (String) v.getTag();
-                    db.delete("user", "id = ?", new String[]{strId});
+                    db.delete("mod", "id = ?", new String[]{strId});
                     fncDataDisp(fncSQLite(db, ""));
                 }
             });
@@ -214,9 +214,9 @@ public class MainActivity extends AppCompatActivity {
         Cursor dbRows;
         try {
             if (!Objects.equals(keyword, "")) {
-                dbRows = db.rawQuery("select * from user where name like ?", new String[]{"%" + keyword + "%"});
+                dbRows = db.rawQuery("select * from mod where name like ?", new String[]{"%" + keyword + "%"});
             } else {
-                dbRows = db.rawQuery("select * from user", null);
+                dbRows = db.rawQuery("select * from mod", null);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -239,8 +239,7 @@ public class MainActivity extends AppCompatActivity {
                 HashMap<String, String> map = new HashMap<>();
                 map.put("id", dbRows.getString(dbRows.getColumnIndex("id")));
                 map.put("name", dbRows.getString(dbRows.getColumnIndex("name")));
-                map.put("age", dbRows.getString(dbRows.getColumnIndex("age")));
-                map.put("pass", dbRows.getString(dbRows.getColumnIndex("pass")));
+                map.put("url", dbRows.getString(dbRows.getColumnIndex("url")));
                 ary.add(map);
                 dbRows.moveToNext();
             }

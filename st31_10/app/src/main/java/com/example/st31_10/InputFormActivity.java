@@ -74,11 +74,9 @@ public class InputFormActivity extends AppCompatActivity {
         inId.setText("");
         ((EditText)findViewById(R.id.inputName)).setText("");
 
-        EditText inAge = findViewById(R.id.inputAge);
-        inAge.setText("");
+        EditText inUrl = findViewById(R.id.inputUrl);
+        inUrl.setText("");
 
-        EditText inPass = findViewById(R.id.inputPass);
-        inPass.setText("");
     }
     public void insertData() {
         EditText inId = findViewById(R.id.inputId);
@@ -88,23 +86,20 @@ public class InputFormActivity extends AppCompatActivity {
         EditText inName = findViewById(R.id.inputName);
         String name = inName.getText().toString();
 
-        EditText inAge = findViewById(R.id.inputAge);
-        String age = inAge.getText().toString();
+        EditText inUrl = findViewById(R.id.inputUrl);
+        String url = inUrl.getText().toString();
 
-        EditText inPass = findViewById(R.id.inputPass);
-        String pass = inPass.getText().toString();
 
         ContentValues values = new ContentValues();
         values.put("id", id);
         values.put("name", name);
-        values.put("age", age);
-        values.put("pass", pass);
-        db.insert("user", null, values);
+        values.put("url", url);
+        db.insert("mod", null, values);
 
-//        UserBeans user = new UserBeans(id, name, Integer.parseInt(age), pass);
-//        user.fncGetData(InputFormActivity.this);
-////        strId = user.getId();
-//        user.fncGetData(InputFormActivity.this, R.id.inputId);
+//        UserBeans mod = new UserBeans(id, name, Integer.parseInt(url), pass);
+//        mod.fncGetData(InputFormActivity.this);
+////        strId = mod.getId();
+//        mod.fncGetData(InputFormActivity.this, R.id.inputId);
 
         Toast.makeText(this, "データを登録しました", Toast.LENGTH_SHORT).show();
 

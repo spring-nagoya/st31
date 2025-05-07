@@ -54,8 +54,7 @@ public class EditFormActivity extends AppCompatActivity {
             HashMap<String, String> map = ary.get(i);
             ((EditText)findViewById(R.id.upd_inputId)).setText(map.get("id"));
             ((EditText)findViewById(R.id.upd_inputName)).setText(map.get("name"));
-            ((EditText)findViewById(R.id.upd_inputAge)).setText(map.get("age"));
-            ((EditText)findViewById(R.id.upd_inputPass)).setText(map.get("pass"));
+            ((EditText)findViewById(R.id.upd_inputUrl)).setText(map.get("url"));
 
         }
 
@@ -90,14 +89,11 @@ public class EditFormActivity extends AppCompatActivity {
                 EditText inName = findViewById(R.id.upd_inputName);
                 String strName = inName.getText().toString();
 
-                EditText inAge = findViewById(R.id.upd_inputAge);
-                String strAge = inAge.getText().toString();
-
-                EditText inPass = findViewById(R.id.upd_inputPass);
-                String strPass = inPass.getText().toString();
+                EditText inUrl = findViewById(R.id.upd_inputUrl);
+                String strUrl = inUrl.getText().toString();
 
                 //入力検証
-                if(strId.isEmpty() || strName.isEmpty() || strAge.isEmpty() || strPass.isEmpty()){
+                if(strId.isEmpty() || strName.isEmpty() || strUrl.isEmpty()){
                     //画面にinsertの通知(Toast)
                     Toast.makeText(EditFormActivity.this,
                             "未入力の項目があります",Toast.LENGTH_LONG).show();
@@ -105,17 +101,16 @@ public class EditFormActivity extends AppCompatActivity {
                 }
 
                 // mydb.execSQLでupdate文を作って渡す。
-//                String strSQL = "update user set name = '" + strName + "', age = " + strAge + ", pass = '" + strPass + "' where id = '" + strId + "'";
+//                String strSQL = "update mod set name = '" + strName + "', age = " + strUrl + ", pass = '" + strPass + "' where id = '" + strId + "'";
 //                mydb.execSQL(strSQL);
 
                 //ContentValuesを使って、データ登録の準備 12/18続き)
                 ContentValues values = new ContentValues();
                 values.put("name",strName);
-                values.put("age",strAge);
-                values.put("pass",strPass);
+                values.put("url",strUrl);
 
                 //mydb.updateでデータ登録をさせる。
-                mydb.update("user",values,"id = ?",new String[]{strId});
+                mydb.update("mod",values,"id = ?",new String[]{strId});
 
                 //画面にinsertの通知(Toast)
                 Toast.makeText(EditFormActivity.this,
@@ -135,18 +130,16 @@ public class EditFormActivity extends AppCompatActivity {
 
         ((EditText)findViewById(R.id.upd_inputName)).setText("");
 
-        EditText inAge = findViewById(R.id.upd_inputAge);
-        inAge.setText("");
+        EditText inUrl = findViewById(R.id.upd_inputUrl);
+        inUrl.setText("");
 
-        EditText inPass = findViewById(R.id.upd_inputPass);
-        inPass.setText("");
     }
 
     @SuppressLint("Range")
     public ArrayList<HashMap<String, String>> fncSQLite(String keyword){
         Cursor dbRows;
 
-        dbRows = mydb.query("user", new String[]{"id","name","age","pass"}, "id like ?", new String[]{ exrId }, null, null, null);
+        dbRows = mydb.query("mod", new String[]{"id","name","url"}, "id like ?", new String[]{ exrId }, null, null, null);
 
         int row_count = dbRows.getCount();
         if(row_count == 0){
@@ -159,8 +152,8 @@ public class EditFormActivity extends AppCompatActivity {
                 HashMap<String, String> map = new HashMap<>();
                 map.put("id", dbRows.getString(dbRows.getColumnIndex("id")));
                 map.put("name", dbRows.getString(dbRows.getColumnIndex("name")));
-                map.put("age", dbRows.getString(dbRows.getColumnIndex("age")));
-                map.put("pass", dbRows.getString(dbRows.getColumnIndex("pass")));
+                map.put("url", dbRows.getString(dbRows.getColumnIndex("url")));
+
                 ary.add(map);
                 dbRows.moveToNext();
             }
