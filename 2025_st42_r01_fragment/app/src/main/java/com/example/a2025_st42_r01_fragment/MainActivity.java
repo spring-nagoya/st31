@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -28,6 +29,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
         fragMana = getSupportFragmentManager();
+
+        Button btnMain = findViewById(R.id.btnMain);
+        Button btnSecond = findViewById(R.id.btnSecond);
+        btnMain.setOnClickListener(this);
+        btnSecond.setOnClickListener(this);
+
+        btnMain.isEnabled();
+
+
 
 //
 //        Button button = findViewById(R.id.btnMain);
@@ -70,15 +80,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FragmentTransaction trans;
         trans = fragMana.beginTransaction();
 
+        Fragment fragment = null;
         if (v.getId() == R.id.btnMain) {
-            new  SecondFragment();
-            trans.replace(R.id.fragmentContainerView, new SecondFragment());
+            fragment = new SecondFragment();
+        } else if (v.getId() == R.id.btnSecond) {
+            fragment = new BlankFragment();
         }
-        else if (v.getId() == R.id.btnSecond) {
-            new BlankFragment();
-            trans.replace(R.id.fragmentContainerView, new BlankFragment());
+        if (fragment != null) {
+            trans.replace(R.id.fragmentContainerView, fragment);
+        }
 
-        }
+//        boolean enabledMain = true, enabledSecond = true;
+//
+//        if (v.getId() == R.id.btnMain) {
+//            new  SecondFragment();
+//            trans.replace(R.id.fragmentContainerView, new SecondFragment());
+////            enabledMain = false;
+//        }
+//        else if (v.getId() == R.id.btnSecond) {
+//            new BlankFragment();
+//            trans.replace(R.id.fragmentContainerView, new BlankFragment());
+////            enabledSecond = false;
+//        }
         trans.commit();
+//        findViewById(R.id.btnMain).setEnabled(enabledMain);
+        findViewById(R.id.btnMain).setEnabled(!findViewById(R.id.btnMain).isEnabled());
+        findViewById(R.id.btnMain).setAlpha(!findViewById(R.id.btnMain).isEnabled() ? 1.0f : 0.5f);
+        findViewById(R.id.btnSecond).setEnabled(!findViewById(R.id.btnSecond).isEnabled());
+        findViewById(R.id.btnSecond).setAlpha(!findViewById(R.id.btnSecond).isEnabled() ? 1.0f : 0.5f);
     }
 }

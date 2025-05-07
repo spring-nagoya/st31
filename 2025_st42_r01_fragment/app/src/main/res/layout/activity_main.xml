@@ -43,6 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="41dp"
         android:layout_marginBottom="260dp"
+        android:enabled="false"
         android:text="firstへ"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnMain" />
