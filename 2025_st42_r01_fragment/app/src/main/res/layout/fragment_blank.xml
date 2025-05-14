@@ -13,15 +13,42 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView"
-            android:layout_width="198dp"
-            android:layout_height="45dp"
-            android:layout_marginStart="63dp"
-            android:layout_marginTop="89dp"
+            android:id="@+id/txtViewFirst"
+            android:layout_width="226dp"
+            android:layout_height="90dp"
+            android:layout_marginTop="45dp"
+            android:layout_marginBottom="23dp"
             android:background="@android:color/holo_green_dark"
             android:text="@string/hello_blank_fragment"
+            app:layout_constraintBottom_toTopOf="@+id/etTextFirst"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/etTextFirst"
+            android:layout_width="208dp"
+            android:layout_height="56dp"
+            android:layout_marginBottom="12dp"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Name"
+            app:layout_constraintBottom_toTopOf="@+id/btnFirst"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtViewFirst" />
+
+        <Button
+            android:id="@+id/btnFirst"
+            android:layout_width="200dp"
+            android:layout_height="66dp"
+            android:layout_marginBottom="440dp"
+            android:text="Button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etTextFirst" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
