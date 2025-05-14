@@ -105,8 +105,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         trans.commit();
 //        findViewById(R.id.btnMain).setEnabled(enabledMain);
         findViewById(R.id.btnMain).setEnabled(!findViewById(R.id.btnMain).isEnabled());
-        findViewById(R.id.btnMain).setAlpha(!findViewById(R.id.btnMain).isEnabled() ? 1.0f : 0.5f);
+        findViewById(R.id.btnMain).setAlpha(findViewById(R.id.btnMain).isEnabled() ? 1.0f : 0.5f);
         findViewById(R.id.btnSecond).setEnabled(!findViewById(R.id.btnSecond).isEnabled());
-        findViewById(R.id.btnSecond).setAlpha(!findViewById(R.id.btnSecond).isEnabled() ? 1.0f : 0.5f);
+        findViewById(R.id.btnSecond).setAlpha(findViewById(R.id.btnSecond).isEnabled() ? 1.0f : 0.5f);
     }
 }
