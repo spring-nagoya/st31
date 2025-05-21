@@ -3,10 +3,15 @@ package com.example.a2025_st42_r01_fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,7 +63,30 @@ public class BlankFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_blank, container, false);
+        TextView txt = view.findViewById(R.id.txtViewFirst);
+        txt.setText("Fragment1");
+
+        Button btnFirst = view.findViewById(R.id.btnFirst);
+        btnFirst.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager manager = requireActivity().getSupportFragmentManager();
+                FragmentTransaction trans = manager.beginTransaction();
+                EditText ed = view.findViewById(R.id.etTextFirst);
+                String str = ed.getText().toString();
+
+//                SecondFragment fragment = new SecondFragment();
+//                Bundle args = new Bundle();
+//                args.putString("data", str);
+//                fragment.setArguments(args);
+
+
+                trans.replace(R.id.fragmentContainerView, SecondFragment.newInstance(str, ""));
+                trans.commit();
+            }
+        });
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_blank, container, false);
+        return view;
     }
 }

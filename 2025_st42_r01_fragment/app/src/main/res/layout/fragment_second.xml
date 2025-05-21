@@ -12,7 +12,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textViewSecond"
             android:layout_width="265dp"
             android:layout_height="118dp"
             android:layout_marginTop="75dp"
@@ -31,9 +31,9 @@
             android:layout_marginBottom="10dp"
             android:text="Button"
             app:layout_constraintBottom_toTopOf="@+id/editTextText"
-            app:layout_constraintEnd_toEndOf="@+id/textView"
-            app:layout_constraintStart_toStartOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintEnd_toEndOf="@+id/textViewSecond"
+            app:layout_constraintStart_toStartOf="@+id/textViewSecond"
+            app:layout_constraintTop_toBottomOf="@+id/textViewSecond" />
 
         <EditText
             android:id="@+id/editTextText"
