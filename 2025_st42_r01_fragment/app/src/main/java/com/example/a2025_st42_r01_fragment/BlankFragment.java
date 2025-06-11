@@ -65,7 +65,10 @@ public class BlankFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_blank, container, false);
         TextView txt = view.findViewById(R.id.txtViewFirst);
-        txt.setText("Fragment1");
+        txt.setText(mParam1);
+        if (mParam1 == null){
+            txt.setText("Fragment First");
+        }
 
         Button btnFirst = view.findViewById(R.id.btnFirst);
         btnFirst.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +79,8 @@ public class BlankFragment extends Fragment {
                 EditText ed = view.findViewById(R.id.etTextFirst);
                 String str = ed.getText().toString();
 
+
+
 //                SecondFragment fragment = new SecondFragment();
 //                Bundle args = new Bundle();
 //                args.putString("data", str);
@@ -84,6 +89,15 @@ public class BlankFragment extends Fragment {
 
                 trans.replace(R.id.fragmentContainerView, SecondFragment.newInstance(str, ""));
                 trans.commit();
+                toggleButtons();
+            }
+            private void toggleButtons() {
+                Button btnFirst = requireActivity().findViewById(R.id.btnMain);
+                Button btnSecond = requireActivity().findViewById(R.id.btnSecond);
+                btnFirst.setEnabled(false);
+                btnFirst.setAlpha(0.5f);
+                btnSecond.setEnabled(true);
+                btnSecond.setAlpha(1.0f);
             }
         });
         // Inflate the layout for this fragment

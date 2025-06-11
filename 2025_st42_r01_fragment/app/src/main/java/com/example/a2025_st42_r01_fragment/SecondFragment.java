@@ -1,12 +1,18 @@
 package com.example.a2025_st42_r01_fragment;
 
+import static com.example.a2025_st42_r01_fragment.R.*;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 /**
@@ -70,6 +76,37 @@ public class SecondFragment extends Fragment {
 
         TextView txt = view.findViewById(R.id.textViewSecond);
         txt.setText(mParam1);
+
+        Button btnSecond = view.findViewById(R.id.buttonTwo);
+        btnSecond.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager manager = requireActivity().getSupportFragmentManager();
+                FragmentTransaction trans = manager.beginTransaction();
+                EditText ed = view.findViewById(R.id.editTextSecond);
+                String str = ed.getText().toString();
+
+
+
+//                SecondFragment fragment = new SecondFragment();
+//                Bundle args = new Bundle();
+//                args.putString("data", str);
+//                fragment.setArguments(args);
+
+
+                trans.replace(R.id.fragmentContainerView, BlankFragment.newInstance(str, ""));
+                trans.commit();
+                toggleButtons();
+            }
+            private void toggleButtons() {
+                Button btnFirst = requireActivity().findViewById(R.id.btnMain);
+                Button btnSecond = requireActivity().findViewById(R.id.btnSecond);
+                btnFirst.setEnabled(true);
+                btnFirst.setAlpha(1.0f);
+                btnSecond.setEnabled(false);
+                btnSecond.setAlpha(0.5f);
+            }
+        });
 
         // Inflate the layout for this fragment
         return view;

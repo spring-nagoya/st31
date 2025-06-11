@@ -110,4 +110,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btnSecond).setAlpha(findViewById(R.id.btnSecond).isEnabled() ? 1.0f : 0.5f);
 
     }
+
+    public void toggleButton(View v) {
+            boolean isEnabled = v.isEnabled();
+            v.setEnabled(!isEnabled);
+            v.setAlpha(isEnabled ? 0.5f : 1.0f);
+        }
 }
