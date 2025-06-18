@@ -14,18 +14,21 @@ public class St42SurfaceView extends SurfaceView implements SurfaceHolder.Callba
         holder.addCallback(this);
     }
 
+
     @Override
-    public void surfaceCreated(@NonNull SurfaceHolder surfaceHolder) {
+    public void surfaceCreated(@NonNull SurfaceHolder holder) {
 
     }
 
     @Override
-    public void surfaceChanged(@NonNull SurfaceHolder surfaceHolder, int i, int i1, int i2) {
-
+    public void surfaceChanged(@NonNull SurfaceHolder holder, int format, int width, int height) {
+        CanvasThread cThread = new CanvasThread();
+        cThread.screenWidth = width;
+        cThread.screenHeight = height;
     }
 
     @Override
-    public void surfaceDestroyed(@NonNull SurfaceHolder surfaceHolder) {
+    public void surfaceDestroyed(@NonNull SurfaceHolder holder) {
 
     }
 }

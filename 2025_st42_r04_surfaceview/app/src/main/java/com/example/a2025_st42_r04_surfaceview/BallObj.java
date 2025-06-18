@@ -9,5 +9,15 @@ public class BallObj {
     public float dx;
     public float dy;
     public Paint paint;
+    public void move(int screenWidth, int screenHeight) {
+        if(ballX + radius > screenWidth || ballX - radius < 0) {
+            dx = -dx;
+        }
+        if(ballY + radius > screenHeight || ballY - radius < 0) {
+            dy = -dy;
+        }
 
+        ballX += dx;
+        ballY += dy;
+    }
 }
