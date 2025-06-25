@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 
 public class St42SurfaceView extends SurfaceView implements SurfaceHolder.Callback {
     private SurfaceHolder holder;
+    private Thread thread;
     public St42SurfaceView(Context context, SurfaceView surfaceView) {
         super(context);
         holder = surfaceView.getHolder();
@@ -25,6 +26,10 @@ public class St42SurfaceView extends SurfaceView implements SurfaceHolder.Callba
         CanvasThread cThread = new CanvasThread();
         cThread.screenWidth = width;
         cThread.screenHeight = height;
+        cThread.holder = holder;
+
+        thread = new Thread(cThread);
+        thread.start();
     }
 
     @Override

@@ -17,7 +17,7 @@ public class BallObj {
             dy = -dy;
         }
 
-        ballX += dx;
-        ballY += dy;
+        ballX += (int) dx;
+        ballY += (int) dy;
     }
 }
